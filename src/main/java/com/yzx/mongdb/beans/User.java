@@ -1,34 +1,20 @@
 package com.yzx.mongdb.beans;
 
-public class User {
-    private String name;
-    private String tel;
-    private String age;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getTel() {
-        return tel;
-    }
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-    public String getAge() {
-        return age;
-    }
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", tel='" + tel + '\'' +
-                ", age='" + age + '\'' +
-                '}';
-    }
-    public void setAge(String age) {
-        this.age = age;
-    }
+@ApiModel(value = "用户信息")
+@Document(collection="user")
+@Data
+public class User {
+    @ApiModelProperty(value = "名字")
+    @Field("name")
+    private String name;
+    @ApiModelProperty(value = "电话")
+    private String tel;
+    @ApiModelProperty(value = "年龄")
+    private Integer age;
 }

@@ -7,18 +7,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 全局异常信息的处理
- */
-@ControllerAdvice
-public class LocalExcptionHandle {
 
+//@ControllerAdvice
+public class LocalExcptionHandle {
     @Autowired
     private MongoTemplate mongoTemplate;
 

@@ -1,37 +1,18 @@
 package com.yzx.mongdb.beans;
 
-import javax.xml.crypto.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 import java.util.Date;
 
+@ApiModel(value = "登陆日志")
+@Data
 public class LogBean {
-
+    @ApiModelProperty(value = "时间")
     private Date date;
-
+    @ApiModelProperty(value = "type")
     private String type;
-
+    @ApiModelProperty(value = "提示")
     private String msg;
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 }
