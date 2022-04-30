@@ -39,7 +39,7 @@ public class MongDBController {
     @ApiOperation(value = "保存数据")
     @PostMapping("/save")
     public ResponesDto save() {
-        for (int i = 0; i < 10000L; i++) {
+        for (int i = 0; i < 100L; i++) {
             User user = new User();
             user.setAge(15 + j + i);
             user.setName("张" + j + i);
@@ -49,6 +49,7 @@ public class MongDBController {
             personFeature.setSchool("柏树" + j + i);
             user.setPersonFeature(personFeature);
             User userTemp = mongoTemplate.save(user);
+            System.out.println(userTemp);
         }
 
         j++;
