@@ -1,8 +1,8 @@
-package com.yzx.mongdb.controller;
+package com.hualr.mongdb.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yzx.mongdb.beans.ResponesDto;
-import com.yzx.mongdb.beans.User;
+import com.hualr.mongdb.beans.ResponesDto;
+import com.hualr.mongdb.beans.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.yzx.mongdb;
+package com.hualr.mongdb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

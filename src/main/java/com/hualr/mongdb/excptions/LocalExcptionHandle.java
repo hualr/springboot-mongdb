@@ -1,9 +1,8 @@
-package com.yzx.mongdb.excptions;
+package com.hualr.mongdb.excptions;
 
-import com.yzx.mongdb.beans.LogBean;
+import com.hualr.mongdb.beans.LogBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 

@@ -1,4 +1,4 @@
-package com.yzx.mongdb.beans;
+package com.hualr.mongdb.beans;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
