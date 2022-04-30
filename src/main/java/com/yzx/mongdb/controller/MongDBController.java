@@ -5,7 +5,7 @@ import com.yzx.mongdb.beans.ResponesDto;
 import com.yzx.mongdb.beans.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.bson.json.JsonObject;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.ScriptOperations;
@@ -14,9 +14,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.script.ExecutableMongoScript;
 import org.springframework.data.mongodb.core.script.NamedMongoScript;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Api(value = "Mongo基本使用", tags = "mongo")
 @RestController
@@ -32,15 +34,25 @@ public class MongDBController {
         return ResponesDto.ok("操作成功", 200, list);
     }
 
+    int j = 2;
+
     @ApiOperation(value = "保存数据")
     @PostMapping("/save")
     public ResponesDto save() {
-        User user = new User();
-        user.setAge(15);
-        user.setName("张三");
-        user.setTel("1782828282");
-        User userTemp = mongoTemplate.save(user);
-        return ResponesDto.ok("操作成功", 200, userTemp);
+        for (int i = 0; i < 10000L; i++) {
+            User user = new User();
+            user.setAge(15 + j + i);
+            user.setName("张" + j + i);
+            user.setTel("1782828282");
+            final User.PersonFeature personFeature = new User.PersonFeature();
+            personFeature.setCountry("chinese");
+            personFeature.setSchool("柏树" + j + i);
+            user.setPersonFeature(personFeature);
+            User userTemp = mongoTemplate.save(user);
+        }
+
+        j++;
+        return ResponesDto.ok("操作成功", 200, null);
     }
 
     @ApiOperation(value = "条件查找数据")
@@ -48,6 +60,8 @@ public class MongDBController {
     public ResponesDto query() {
         Query query = new Query(Criteria.where("name").is("张三"));
         User user1 = mongoTemplate.findOne(query, User.class);
+
+        final List<User> users = mongoTemplate.find(query, User.class);
         return ResponesDto.ok();
     }
 

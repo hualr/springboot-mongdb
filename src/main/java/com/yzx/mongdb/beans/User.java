@@ -17,4 +17,11 @@ public class User {
     private String tel;
     @ApiModelProperty(value = "年龄")
     private Integer age;
+
+    public PersonFeature personFeature;
+    @Data
+    public static  class PersonFeature {
+        private String school;
+        private String country;
+    }
 }
