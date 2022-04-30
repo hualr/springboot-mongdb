@@ -3,9 +3,9 @@ package com.hualr.mongdb.entity;
 import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 /**
  * Function: 书籍<br>
@@ -18,8 +18,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Accessors(chain = true)
 @Document
 public class Book {
-    @Id
-    private String id;
+ /*   @Id
+    private String id;*/
+
+    @MongoId
+    private String mongoDbId;
 
     @Field("book_name")
     private String name;
