@@ -3,15 +3,11 @@ package com.hualr.mongdb.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.hualr.mongdb.beans.ResponesDto;
 import com.hualr.mongdb.beans.User;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.ScriptOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.mongodb.core.script.ExecutableMongoScript;
 import org.springframework.data.mongodb.core.script.NamedMongoScript;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,23 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(value = "Mongo基本使用", tags = "mongo")
 @RestController
 @RequestMapping("/mongo")
 public class MongDBController {
     @Autowired
     private MongoTemplate mongoTemplate;
-
-    @ApiOperation(value = "查询所有数据")
-    @GetMapping("/find")
-    public ResponesDto findAll() {
-        List<User> list = mongoTemplate.findAll(User.class);
-        return ResponesDto.ok("操作成功", 200, list);
-    }
-
     int j = 2;
 
-    @ApiOperation(value = "保存数据")
+
+
     @PostMapping("/save")
     public ResponesDto save() {
         for (int i = 0; i < 100L; i++) {
@@ -56,17 +44,6 @@ public class MongDBController {
         return ResponesDto.ok("操作成功", 200, null);
     }
 
-    @ApiOperation(value = "条件查找数据")
-    @PostMapping("/query")
-    public ResponesDto query() {
-        Query query = new Query(Criteria.where("name").is("张三"));
-        User user1 = mongoTemplate.findOne(query, User.class);
-
-        final List<User> users = mongoTemplate.find(query, User.class);
-        return ResponesDto.ok();
-    }
-
-    @ApiOperation(value = "删除数据")
     @DeleteMapping("/remove")
     public ResponesDto remove() {
         Query query = new Query(Criteria.where("name").is("张三"));
@@ -74,17 +51,7 @@ public class MongDBController {
         return ResponesDto.ok();
     }
 
-    @ApiOperation(value = "更新数据")
-    @PostMapping("/update")
-    public ResponesDto update() {
-        Query query = new Query(Criteria.where("name").is("zhangsan5"));
-        Update update = new Update();
-        update.set("age", "55");
-        mongoTemplate.updateFirst(query, update, User.class);
-        return ResponesDto.ok();
-    }
 
-    @ApiOperation(value = "mongo脚本操作", notes = "最新版本已经过期，不推荐使用")
     @GetMapping("/shell")
     public ResponesDto shell() {
         ScriptOperations scriptOps = mongoTemplate.scriptOps();
@@ -100,7 +67,6 @@ public class MongDBController {
         return ResponesDto.ok("操作成功", 200, String.valueOf(call));
     }
 
-    @ApiOperation(value = "mongo脚本操作2", notes = "最新版本已经过期，不推荐使用")
     @GetMapping("/shell2")
     public ResponesDto shell2() {
         ScriptOperations scriptOps = mongoTemplate.scriptOps();
@@ -115,7 +81,6 @@ public class MongDBController {
         return ResponesDto.ok("操作成功", 200, String.valueOf(call));
     }
 
-    @ApiOperation(value = "mongo脚本操作3", notes = "查询user个数并返回")
     @GetMapping("/shell3")
     public ResponesDto shell3() {
         ScriptOperations scriptOps = mongoTemplate.scriptOps();

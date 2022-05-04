@@ -1,6 +1,7 @@
 package com.hualr.mongdb.controller;
 
 import com.hualr.mongdb.entity.Book;
+import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,6 +84,19 @@ public class BookController {
     @GetMapping("/findAll")
     public List<Book> findAll() {
         return mongoTemplate.findAll(Book.class);
+    }
+
+    @PostMapping("/update")
+    public void updateOne(@RequestParam String name) {
+        Query query = new Query(Criteria.where("book_name").is(name));
+        List<Book> books = mongoTemplate.find(query, Book.class);
+        Update update = new Update();
+        update.set("name", "李小白");
+        UpdateResult updateResult = mongoTemplate.updateMulti(query, update, Book.class);
+        
+        //query.addCriteria(Criteria.where("a").)
+        
+
     }
 
 
